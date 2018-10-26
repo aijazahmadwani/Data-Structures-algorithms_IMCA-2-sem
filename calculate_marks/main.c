@@ -16,19 +16,21 @@ int main()
 {
     int i,count=0;
     for(i=0;i<5;i++){
-    printf("enter student name and marks of %d th student: ",i);
+    printf("enter student name and marks of %dth student: ",i);
         scanf("%s",&stu[i].name);
         scanf("%d",&stu[i].marks);
     }
+    printf("\n\nstudents who obtained more than 60 marks ");
     for(i=0;i<5;i++)
     {
         if(stu[i].marks>60){
             count++;
             printf("%s",stu[i].name);
-            printf("%d",stu[i].marks);
+            printf(" %d",stu[i].marks);
             printf("\n");
         }
 
     }
+    printf("\ntotal no. of students who got more than 60 marks = %d",count);
     getch();
 }
