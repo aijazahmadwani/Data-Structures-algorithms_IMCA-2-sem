@@ -11,8 +11,6 @@ void menu();
 void insert();
 void display();
 void delete();
-int full();
-int empty();
 int main()
 {
     while(1)
@@ -24,19 +22,19 @@ int main()
     switch(choice)
     {
     case 1:
-        if(full())
+        if()
             printf("\nQueue is full");
         else
             insert();
         break;
     case 2:
-        if(empty())
+        if()
             printf("\nQueue is empty");
         else
         delete();
         break;
     case 3:
-        if(empty())
+        if()
             printf("\nQueue is empty");
         else
             display();
@@ -63,43 +61,37 @@ void menu()
 
 }
 
-int full()
-{
-    if(rear==capacity-1||front==rear+1)
-        return 1;
-    else
-        return 0;
-}
-
-int empty()
-{
-    if(rear==-1&&front==-1)
-        return 1;
-    else
-        return 0;
-}
-
 void insert()
 {
-    if(front==-1&&rear==-1)
-        front=rear=0;
-    printf("\nEnter element to be inserted");
-    scanf("%d",&ele);
-    cqueue[rear]=ele;
-    printf("%d inserted successfully",ele);
-    rear++;
-    if(rear==capacity-1)
-        rear=0;
-
+    if(front==0&&rear==capacity-1)
+    {
+        printf("\nOverflow!");
+        return;
+    }
+     if(front==-1&&rear==-1)
+        front=0,rear=0;
+    else if(rear==capacity-1&&front!=0)
+            rear=0;
+        else
+            rear++;
+        printf("\nEnter element to be inserted ");
+        scanf("%d",&ele);
+        cqueue[rear]=ele;
 }
 
 void delete()
 {
-    if(front==capacity-1)
-        front=0;
-    ele=cqueue[front];
-    front++;
-    printf("%d deleted!",ele);
+    if(front==-1)
+        {
+        printf("\nUnderflow");
+        return;
+        }
+        ele=cqueue[front];
+        printf("%d deleted successfully",ele);
+        if(front==rear)
+            front=rear=-1;
+
+
 }
 
 void display()
