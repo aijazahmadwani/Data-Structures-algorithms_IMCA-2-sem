@@ -1,3 +1,7 @@
+/* Author: Aijaz Ahmad Wani
+email :aijazahmad9864@gmail.com
+IMCA (SEM-2)
+subject: Data Structures*/
 #include <stdio.h>
 #include <stdlib.h>
 #define months 5

@@ -1,6 +1,6 @@
 /* Author: Aijaz Ahmad Wani
 email :aijazahmad9864@gmail.com
-IMCA (SEM-1) */
+IMCA (SEM-2) */
 //stack operation with array implementation
 #include <stdio.h>
 #include <stdlib.h>
