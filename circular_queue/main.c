@@ -11,6 +11,8 @@ void menu();
 void insert();
 void display();
 void delete();
+int full();
+int empty();
 int main()
 {
     while(1)
@@ -22,19 +24,19 @@ int main()
     switch(choice)
     {
     case 1:
-        if()
+        if(full())
             printf("\nQueue is full");
         else
             insert();
         break;
     case 2:
-        if()
+        if(empty())
             printf("\nQueue is empty");
         else
-        delete();
+            delete();
         break;
     case 3:
-        if()
+        if(empty())
             printf("\nQueue is empty");
         else
             display();
@@ -63,41 +65,63 @@ void menu()
 
 void insert()
 {
-    if(front==0&&rear==capacity-1)
-    {
-        printf("\nOverflow!");
-        return;
-    }
      if(front==-1&&rear==-1)
         front=0,rear=0;
     else if(rear==capacity-1&&front!=0)
             rear=0;
-        else
-            rear++;
-        printf("\nEnter element to be inserted ");
-        scanf("%d",&ele);
-        cqueue[rear]=ele;
+    else
+        rear++;
+    printf("\nEnter element to be inserted ");
+    scanf("%d",&ele);
+    cqueue[rear]=ele;
 }
 
 void delete()
 {
-    if(front==-1)
-        {
-        printf("\nUnderflow");
-        return;
-        }
         ele=cqueue[front];
+        if(front==rear){
+            front=-1;
+            rear=-1;
+        }
+        else if(front==capacity-1){
+            front=0;
+        }
+        else {
+            front++;
+        }
         printf("%d deleted successfully",ele);
-        if(front==rear)
-            front=rear=-1;
-
-
 }
 
 void display()
 {
-    int i;
-    printf("\nElements are : ");
-    for(i=front;i<rear;i++)
-        printf("%d\t",cqueue[i]);
+    int i=front;
+    while(i!=rear)
+    {
+    printf("%d\t",cqueue[i]);
+    if(i==capacity-1)
+        {
+            i=0;
+        }
+    else{
+            i++;
+    }
+    }
+    printf("%d",cqueue[rear]);
+
+}
+int full()
+{
+    if(front==0&&rear==capacity-1||front==rear+1)
+        return 1;
+    else
+        return 0;
+
+}
+
+int empty()
+{
+    if(front==-1&&rear==-1)
+        return 1;
+    else
+        return 0;
 }
