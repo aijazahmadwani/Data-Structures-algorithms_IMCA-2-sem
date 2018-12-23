@@ -9,7 +9,7 @@ void display();
 void create_list();
 int length();
 void add_at_begin();
-void insert_node_at_pos(int);
+void insert_node_after(int);
 void delete();
 int menu();
 struct node
@@ -24,7 +24,7 @@ int main()
     while(1)
     {
     system("cls");
-    int choice,count=0,pos,del;
+    int choice,count=0,data,del,d1,d2;
     choice=menu();
     switch(choice)
     {
@@ -37,12 +37,14 @@ int main()
             printf("Data inserted successfully");
             break;
         case 3:
-            printf("\nEnter position where you want to insert data : ");
-            scanf("%d",&pos);
-            insert_node_at_pos(pos);
+            display();
+            printf("\nEnter data after you want to insert new element : ");
+            scanf("%d",&data);
+            insert_node_after(data);
             printf("\nNode inserted ");
             break;
         case 4:
+            display();
             printf("\nEnter data you want to delete : ");
             scanf("%d",&del);
             delete(del);
@@ -57,8 +59,6 @@ int main()
 
             break;
         case 7:
-        case 8:
-        case 9:
             exit(0);
         default:
             printf("\nInvalid input ......Try again");
@@ -73,13 +73,11 @@ int menu()
     int choice;
     printf("\n1.create list\n");
     printf("2.Add Node at beginning\n");
-    printf("3.Insert data at a position\n");
+    printf("3.Insert data after a node\n");
     printf("4.Delete a node\n");
     printf("5.Display\n");
     printf("6.Length of Linked list\n");
-    printf("7.Reverse linked list\n");
-    printf("8.Swap two Nodes\n");
-    printf("9.Exit\n");
+    printf("7.Exit\n");
     printf("\n\n\nEnter your choice : ");
     scanf("%d",&choice);
     return (choice);
@@ -153,6 +151,7 @@ void add_at_begin()
     {
     root=temp;
     }
+
     else
     {
         temp->link=root;
@@ -160,32 +159,22 @@ void add_at_begin()
     }
 }
 
-void insert_node_at_pos(int pos)
+void insert_node_after(int data)
 {
 
-    int count;
-    count=length();
-    struct node* temp,*t;
-    printf("\nEnter data you want to insert : ");
+    struct node* temp;
+    struct node* f;
+    temp =(struct node*)malloc(sizeof(struct node));
+    printf("Enter data : ");
     scanf("%d",&temp->data);
-    temp->link = NULL;
-    t=root;
-    if(pos > count)
+    temp->link=NULL;
+    f=root;
+    while(f->data!=data)
     {
-        printf("\nList contains %d nodes, therefore node inserted at last position ",count);
-
-        while(t->link!=NULL)
-        {
-            t=t->link;
-        }
-        t->link=temp;
-        return;
+        f=f->link;
     }
-    else
-    {
-
-    }
-
+    temp->link=f->link;
+    f->link=temp;
 }
 
 void delete(int del)
@@ -202,9 +191,17 @@ void delete(int del)
     {
             while(temp1->link!=NULL)
             {
+                if(temp1->data==del)
+                {
+                    break;
+                }
+                temp2=temp1;
                 temp1=temp1->link;
             }
+             temp2->link=temp1->link;
+            printf("%d deleted successfully",del);
 
     }
 
 }
+
