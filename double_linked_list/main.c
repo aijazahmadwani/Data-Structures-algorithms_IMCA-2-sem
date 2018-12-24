@@ -10,6 +10,8 @@ void append();
 void display();
 void display_in_reverse();
 void add_at_begin(int);
+void add_after_a_node();
+int lenght();
 struct node
 {
     int data;
@@ -22,7 +24,7 @@ int main()
     while(1)
     {
     system("cls");
-    int choice,data;
+    int choice,data,l;
     choice=menu();
     switch(choice)
     {
@@ -44,6 +46,14 @@ int main()
     case 4:
         display_in_reverse();
         break;
+    case 5:
+        add_after_a_node();
+        printf("Inserted successfully!");
+        break;
+    case 6:
+        l=length();
+        printf("\nLength = %d",l);
+        break;
     }
     getch();
     }
@@ -58,6 +68,8 @@ int menu()
     printf("\n2. Display");
     printf("\n3. Add at beginning");
     printf("\n4. Display in reverse order ");
+    printf("\n5. Add after a node ");
+    printf("\n6. Length of list");
     printf("\nEnter your choice: ");
     scanf("%d",&choice);
     return choice;
@@ -141,4 +153,50 @@ void display_in_reverse()
         }
         printf("%d",temp->data);
     }
+}
+
+void add_after_a_node()
+{
+    struct node* temp,*t;
+    int data;
+    temp = (struct node*)malloc(sizeof(struct node));
+    printf("Enter data you want to insert : ");
+    scanf("%d",&temp->data);
+    printf("\nEnter element after you want to insert data :");
+    scanf("%d",&data);
+    temp->left = NULL;
+    temp->right = NULL;
+    t=root;
+    while(t->data!=data)
+    {
+        t=t->right;
+    }
+    temp->right=t->right;
+    t->right->left=temp;
+    temp->left =  t;
+    t->right = temp;
+
+}
+
+int length()
+{
+    int count=0;
+    struct node* t;
+    if(root==NULL)
+    {
+        printf("No element in list");
+
+    }
+    else
+    {
+        t=root;
+        while(t->right!=NULL)
+        {
+            count++;
+            t=t->right;
+        }
+        count++;
+
+    }
+return count;
 }
