@@ -5,20 +5,32 @@ subject: DATA STRUCTURES
 PROGARM:SELECTION SORT*/
 #include <stdio.h>
 #include <stdlib.h>
+void selection_sort(int *,int );
 
 int main()
 {
     int n,i,j,temp;
-    printf("how many numbers you want to enter");
+    printf("Enter size of array : ");
     scanf("%d",&n);
     int a[n];
     printf("enter %d numbers ",n);
     for(i=0;i<n;i++)
-        scanf("%d",&a[i]);
-    // logic of selection sort
+    {
+         scanf("%d",&a[i]);
+    }
+    selection_sort(a,n);
+    printf("Array in Ascending order\n");
+    for(i=0;i<n;i++)
+        printf("%d\t",a[i]);
+
+}
+
+void selection_sort(int a[],int n)
+{
+    int i,j,temp;
     for(i=0;i<n;i++)
     {
-        for(j=i+1;j<n;j++)//here i+1 bcz we compare first element with all other elements,then start from second element , then third and so on
+        for(j=i+1;j<n;j++)
         {
             if(a[i]>a[j])
             {
@@ -28,8 +40,4 @@ int main()
             }
         }
     }
-    printf("Array in Ascending order");
-    for(i=0;i<n;i++)
-        printf("%d\t",a[i]);
-
 }

@@ -12,6 +12,7 @@ void display_in_reverse();
 void add_at_begin(int);
 void add_after_a_node();
 int lenght();
+void delete(int);
 struct node
 {
     int data;
@@ -24,7 +25,7 @@ int main()
     while(1)
     {
     system("cls");
-    int choice,data,l;
+    int choice,data,l,del;
     choice=menu();
     switch(choice)
     {
@@ -54,6 +55,13 @@ int main()
         l=length();
         printf("\nLength = %d",l);
         break;
+    case 7:
+        display();
+        printf("\nEnter element to delete");
+        scanf("%d",&del);
+        delete(del);
+        printf("\nDeleted successfully");
+        display();
     }
     getch();
     }
@@ -70,6 +78,7 @@ int menu()
     printf("\n4. Display in reverse order ");
     printf("\n5. Add after a node ");
     printf("\n6. Length of list");
+    printf("\n7. Delete a node");
     printf("\nEnter your choice: ");
     scanf("%d",&choice);
     return choice;
@@ -199,4 +208,17 @@ int length()
 
     }
 return count;
+}
+
+void delete(int del)
+{
+    struct node* temp1,*temp2;
+    temp1=root;
+    while(temp1->data!=del)
+    {
+        temp2=temp1;
+        temp1 = temp1->right;
+    }
+    temp2->right=temp1->right;
+    temp1->right->left = temp2;
 }
